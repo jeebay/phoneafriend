@@ -1,17 +1,16 @@
+// Dependencies
 var express = require('express');
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
-var sqlite3 = require('sqlite3').verbose();
-var db = new sqlite3.Database('phone.db');
 
+// MongoDB connection
+mongoose.connect('mongodb://localhost/rest_text');
+
+// Initialize Express and parse body with bodyParser
 var app = module.exports = express();
+app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json());
 
-
-
-app.get('/', function(req, res) {
-    res.json({"endpoints": ["users"]});
-});
-
-app.get('/users', function(req, res) {
-    res.json({"message": "i've done it!"});
-});
+// Set up routes
+require('./routes/api.js')(app);
