@@ -1,13 +1,12 @@
 /** @jsx React.DOM */
 
+// Dependencies
 var React = require('react');
 var HomeView = require('./HomeView.js');
 var FriendsList = require('./FriendsList.js');
 var Radium = require('radium');
 
-// var DialButton = React.createFactory(require('./DialButton.jsx'));
-// var ManageFriendsButton = React.createFactory(require('./ManageFriendsButton.jsx'));
-
+// Main container for the various application views
 var PhoneApp = React.createClass({
     getInitialState: function () {
         return {
@@ -22,7 +21,7 @@ var PhoneApp = React.createClass({
     },
     render: function () {
         var partial;
-        var user = {id:"0", name:"brian", phone:"555-555-5555", email:"test@example.com"};
+        var user = {id:"560083bd30a9bf36c497171c", name:"brian", phone:"5555555555", email:"test@test.com"};
         if (this.state.currentView == "manageFriends") {
             partial = <FriendsList url="api/vi/users/" currentUser={user} />;
         } else {
