@@ -4,10 +4,10 @@ var React = require('react');
 
 var ButtonArea = React.createClass({
     dial: function() {
-    	this.props.handleDial();
+    	this.props.onDialSubmit();
     },
     manage: function() {
-    	this.props.handleManage();
+    	this.props.onManageSubmit();
     },
     render: function() {
         return (

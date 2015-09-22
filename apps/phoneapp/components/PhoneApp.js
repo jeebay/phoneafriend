@@ -4,28 +4,44 @@
 var React = require('react');
 var HomeView = require('./HomeView.js');
 var FriendsList = require('./FriendsList.js');
+var Login = require('./Login');
 var Radium = require('radium');
 
 // Main container for the various application views
 var PhoneApp = React.createClass({
     getInitialState: function () {
         return {
-            currentView: "home"
+            currentView: "manageFriends",
+            availability: 0
         };
     },
-    handleDial: function () {
-
+    onSelectorChange: function (availability) {
+        this.state.availability = availability
     },
-    handleManage: function () {
-
+    onDialSubmit: function () {
+        console.log("dial a friend!");
+    },
+    onManageSubmit: function () {
+        this.setState({
+            currentView: "manageFriends"
+        });
+    },
+    onLoginSubmit: function () {
+        // user is currently hardcoded for demo purposes. Must change.
+        this.setState({
+            currentView: "homeView"
+        });
     },
     render: function () {
         var partial;
-        var user = {id:"560083bd30a9bf36c497171c", name:"brian", phone:"5555555555", email:"test@test.com"};
+        // HARDCODED USER PLEASE CHANGE
+        var user = {_id:"560083bd30a9bf36c497171c", name:"brian", phone:"5555555555", email:"test@test.com"};
         if (this.state.currentView == "manageFriends") {
-            partial = <FriendsList url="api/vi/users/" currentUser={user} />;
-        } else {
-            partial = <HomeView />
+            partial = <FriendsList url="api/v1/" currentUser={user} />;
+        } else if (this.state.currentView == "login") {
+            partial = <Login onLoginSubmit={this.onLoginSubmit} />
+        } else if (this.state.currentView == "homeView") {
+            partial = <HomeView onManageSubmit={this.onManageSubmit} onDialSubmit={this.onDialSubmit} onSelectorChange={this.onSelectorChange}/>
         }
 
         return (

@@ -5,11 +5,20 @@ var AvailabilitySelector = require('./AvailabilitySelector.js');
 var ButtonArea = require('./ButtonArea.js');
 
 var HomeView = React.createClass({
+	onSelectorChange: function (availability) {
+		this.props.onSelectorChange(availability);
+	},
+	onDialSubmit: function () {
+		this.props.onDialSubmit();
+	},
+	onManageSubmit: function () {
+		this.props.onManageSubmit();
+	},
 	render: function () {
 		return (
 			<div>
-				<AvailabilitySelector />
-				<ButtonArea />
+				<AvailabilitySelector onSelectorChange={this.onSelectorChange} />
+				<ButtonArea onDialSubmit={this.onDialSubmit} onManageSubmit={this.onManageSubmit}/>
 			</div>
 		);
 	}
