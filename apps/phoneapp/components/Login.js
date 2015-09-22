@@ -36,6 +36,7 @@ var Login = React.createClass({
 				id="password"/>
 				<br />
 				<button className="btn btn-default">Login</button>
+				
 			</form>
 		);
 	}

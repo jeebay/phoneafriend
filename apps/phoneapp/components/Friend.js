@@ -10,7 +10,7 @@ var Friend = React.createClass({
 		var email = this.props.email
 		var phone = this.props.phone
 		return (
-			<li>
+			<li style={styles.liBase}>
 				<span style={[styles.base, this.props.bgColor && styles.bgColor]} key={this.props.uniq} >{name} | {email} | {phone}</span>
 			</li>
 		);
@@ -23,6 +23,11 @@ var styles = {
 	},
 	bgColor: {
 		background: "#EFE"
+	},
+	liBase: {
+		listStyle: "none",
+		fontSize: "1.5em",
+		width: "100%"
 	}
 };
 

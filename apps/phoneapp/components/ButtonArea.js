@@ -13,7 +13,7 @@ var ButtonArea = React.createClass({
         return (
             <div className="btn-group">
                 <button className="btn btn-primary" onClick={this.dial}>Dial a friend</button>
-                <button className="btn btn-info" onClick={this.manage}>Friend List</button>
+                <button className="btn btn-warning" onClick={this.manage}>Friend List</button>
             </div>
         );
     }

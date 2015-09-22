@@ -5,18 +5,31 @@ var React = require('react');
 var HomeView = require('./HomeView.js');
 var FriendsList = require('./FriendsList.js');
 var Login = require('./Login');
+var CountDownTimer = require('./CountDownTimer.js');
 var Radium = require('radium');
 
 // Main container for the various application views
 var PhoneApp = React.createClass({
     getInitialState: function () {
         return {
-            currentView: "manageFriends",
-            availability: 0
+            currentView: "login",
+            availability: 0,
+            timerVisibility: false,
+            timerComplete: false
         };
     },
     onSelectorChange: function (availability) {
-        this.state.availability = availability
+        this.setState({
+            availability: availability,
+            timerVisibility: true,
+            timerComplete: false
+        });
+    },
+    onTimerComplete: function () {
+        this.setState({
+            timerVisibility: false,
+            timerComplete: true
+        });
     },
     onDialSubmit: function () {
         console.log("dial a friend!");
@@ -44,9 +57,15 @@ var PhoneApp = React.createClass({
             partial = <HomeView onManageSubmit={this.onManageSubmit} onDialSubmit={this.onDialSubmit} onSelectorChange={this.onSelectorChange}/>
         }
 
+        var timer;
+        if (this.state.timerVisibility) {
+            timer = <CountDownTimer initialTimeRemaining={this.state.availability * 60000} completeCallback={this.onTimerComplete}/>
+        }
+
         return (
-            <div style={styles.container}>
+            <div style={[styles.container, this.state.timerComplete && styles.complete]}>
                 {partial}
+                {timer}
             </div> 
         );
     }
@@ -55,12 +74,13 @@ var PhoneApp = React.createClass({
 var styles = {
     container: {
         color: "#224",
-        border: "1px solid grey",
-        ':hover': {
-            backgroundColor: '#efe'
-        },
-        padding: '5px',
-        width: '480px'
+        width: "100%",
+        paddingLeft: "5px",
+        paddingRight: "5px",
+        paddingBottom: "10px"
+    },
+    complete: {
+        backgroundColor: "#fee"
     }
 }
 

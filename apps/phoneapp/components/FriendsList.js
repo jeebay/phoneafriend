@@ -105,7 +105,7 @@ var FriendList = React.createClass({
 		return (
 			<div>
 				<h2 style={styles.h2base}> {this.props.currentUser.name}'s friends</h2>
-				<button className="btn" style={styles.button} onClick={this.goBack}>X</button>
+				<button className="btn btn-danger" style={styles.button} onClick={this.goBack}>X</button>
 				<hr />
 				<ul>
 					{friends}
@@ -129,7 +129,8 @@ var styles = {
 	},
 	button: {
 		displat: "inline-block",
-		float: "right"
+		float: "right",
+		marginBotton: "5px"
 	}
 };
 

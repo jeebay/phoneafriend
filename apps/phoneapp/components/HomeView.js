@@ -18,6 +18,7 @@ var HomeView = React.createClass({
 		return (
 			<div>
 				<AvailabilitySelector onSelectorChange={this.onSelectorChange} />
+				<br />
 				<ButtonArea onDialSubmit={this.onDialSubmit} onManageSubmit={this.onManageSubmit}/>
 			</div>
 		);
