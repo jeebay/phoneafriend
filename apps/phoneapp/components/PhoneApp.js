@@ -37,7 +37,7 @@ var PhoneApp = React.createClass({
         // HARDCODED USER PLEASE CHANGE
         var user = {_id:"560083bd30a9bf36c497171c", name:"brian", phone:"5555555555", email:"test@test.com"};
         if (this.state.currentView == "manageFriends") {
-            partial = <FriendsList url="api/v1/" currentUser={user} />;
+            partial = <FriendsList url="api/v1/" currentUser={user} goBack={this.onLoginSubmit}/>;
         } else if (this.state.currentView == "login") {
             partial = <Login onLoginSubmit={this.onLoginSubmit} />
         } else if (this.state.currentView == "homeView") {

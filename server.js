@@ -7,7 +7,6 @@ var env = require('node-env-file');
 // use the environment variables in the ./.env file
 env(__dirname + '/.env');
 
-
 // if in the development environment, transpile assets on request in development
 // run gulp in production 
 if ('development' == process.env.NODE_ENV) {

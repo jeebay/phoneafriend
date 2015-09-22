@@ -83,6 +83,9 @@ var FriendList = React.createClass({
 			data: friend
 		})
 	},
+	goBack: function () {
+		this.props.goBack();
+	},
 	render: function () {
 		var friends = this.state.friends.map(function(friend, index) {
 			return (
@@ -101,7 +104,8 @@ var FriendList = React.createClass({
 
 		return (
 			<div>
-				<h2 styles={style.h2base} >{this.props.currentUser.name}'s friends</h2>
+				<h2 style={styles.h2base}> {this.props.currentUser.name}'s friends</h2>
+				<button className="btn" style={styles.button} onClick={this.goBack}>X</button>
 				<hr />
 				<ul>
 					{friends}
@@ -118,9 +122,14 @@ var FriendList = React.createClass({
 	}
 });
 
-var style = {
+var styles = {
 	h2base: {
-		textAlign: "center"
+		textAlign: "center",
+		display: "inline-block",
+	},
+	button: {
+		displat: "inline-block",
+		float: "right"
 	}
 };
 
