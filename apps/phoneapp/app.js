@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var PhoneApp = require('./components/PhoneApp.js');
 

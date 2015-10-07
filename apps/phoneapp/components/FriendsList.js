@@ -1,8 +1,7 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var Radium = require('radium');
 var Friend = require('./Friend.js');
+var _ = require('lodash');
 
 var FriendList = React.createClass({
 	getInitialState: function () {
@@ -25,16 +24,17 @@ var FriendList = React.createClass({
 			}.bind(this)
 		});
 	},
-	removeFriend: function (friend, index) {
+	removeFriend: function (_id) {
 		// remove friend from this.state.friends
 		var friends = this.state.friends;
-		friends.splice(index, 1);
+		var index = _.pluck(friends, '_id').indexOf(_id);
+		var friend = friends.splice(index, 1);
 		this.setState({
 			friends: friends
 		});
 
 		// update datastore 
-		var url = this.props.url + "friends/" + friend._id;
+		var url = this.props.url + "friends/" + _id;
 		$.ajax({
 			method: "DELETE",
 			url: url,
@@ -48,7 +48,7 @@ var FriendList = React.createClass({
 				this.setState({
 					friends: friends
 				});
-			}
+			}.bind(this)
 		});
 	},
 	editFriend: function (friend, index) {
@@ -107,9 +107,9 @@ var FriendList = React.createClass({
 				<h2 style={styles.h2base}> {this.props.currentUser.name}'s friends</h2>
 				<button className="btn btn-danger" style={styles.button} onClick={this.goBack}>X</button>
 				<hr />
-				<ul>
+				<div>
 					{friends}
-				</ul>
+				</div>
 				<form className="form-group" onSubmit={this.addFriend}>
 					<h3>Add a friend</h3>
 					<input className="form-control" type="text" ref="friendName" placeholder="friend name" />
@@ -128,9 +128,9 @@ var styles = {
 		display: "inline-block",
 	},
 	button: {
-		displat: "inline-block",
+		display: "inline-block",
 		float: "right",
-		marginBotton: "5px"
+		marginBottom: "5px"
 	}
 };
 

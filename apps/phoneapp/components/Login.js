@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 // Dependencies
 var React = require('react');
 

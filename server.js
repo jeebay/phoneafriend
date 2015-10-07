@@ -1,7 +1,6 @@
 var express = require('express');
 var path = require('path');
 var app = express();
-var bodyParser = require('body-parser');
 var env = require('node-env-file');
 
 // use the environment variables in the ./.env file
@@ -12,7 +11,7 @@ env(__dirname + '/.env');
 if ('development' == process.env.NODE_ENV) {
     app.use(require('browserify-dev-middleware')({
     src: path.resolve(__dirname),
-    transforms: [require('reactify')]
+    transforms: [require('babelify')]
     }));
 }
 

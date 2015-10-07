@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 // Dependencies
 var React = require('react');
 var HomeView = require('./HomeView.js');
@@ -12,7 +10,7 @@ var Radium = require('radium');
 var PhoneApp = React.createClass({
     getInitialState: function () {
         return {
-            currentView: "login",
+            currentView: "manageFriends",
             availability: 0,
             timerVisibility: false,
             timerComplete: false

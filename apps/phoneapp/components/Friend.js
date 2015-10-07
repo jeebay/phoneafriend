@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 // Dependencies
 var React = require('react');
 var Radium = require('radium');
@@ -10,10 +8,22 @@ var Friend = React.createClass({
 		var email = this.props.email
 		var phone = this.props.phone
 		return (
-			<li style={styles.liBase}>
-				<span style={[styles.base, this.props.bgColor && styles.bgColor]} key={this.props.uniq} >{name} | {email} | {phone}</span>
-			</li>
+			<div style={styles.liBase}>
+				<span style={[styles.base, this.props.bgColor && styles.bgColor]} key={this.state.uniq} >{name} | {email} | {phone}</span>
+				<br />
+				<button className="btn btn-primary" onClick={this.removeFriend}>Delete</button>
+				<button className="btn btn-" onClick={this.editFriend}>Edit</button>
+				<br />	
+			</div>
 		);
+	},
+	removeFriend: function () {
+		var uniq = this.props.uniq;
+		this.props.removeFriend(uniq);
+	},
+	editFriend: function () {
+		var uniq = this.props.uniq;
+		this.props.editFriend(uniq);
 	}
 });
 

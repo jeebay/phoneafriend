@@ -1,5 +1,3 @@
-/** @jsx React.DOM */
-
 var React = require('react');
 var AvailabilitySelector = require('./AvailabilitySelector.js');
 var ButtonArea = require('./ButtonArea.js');
