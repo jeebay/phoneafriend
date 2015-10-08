@@ -51,8 +51,8 @@ var FriendList = React.createClass({
 			}.bind(this)
 		});
 	},
-	editFriend: function (friend, index) {
-
+	editFriend: function (_id) {
+		
 	},
 	addFriend: function (e) {
 		e.preventDefault();

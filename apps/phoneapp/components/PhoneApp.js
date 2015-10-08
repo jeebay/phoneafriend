@@ -45,7 +45,7 @@ var PhoneApp = React.createClass({
     },
     render: function () {
         var partial;
-        // HARDCODED USER PLEASE CHANGE
+        // HARDCODED USER CHANGE WHEN AUTHENTICATION AND SESSIONS ARE UP AND RUNNING
         var user = {_id:"560083bd30a9bf36c497171c", name:"brian", phone:"5555555555", email:"test@test.com"};
         if (this.state.currentView == "manageFriends") {
             partial = <FriendsList url="api/v1/" currentUser={user} goBack={this.onLoginSubmit}/>;

@@ -21,7 +21,7 @@ app.use(express.static(path.join(__dirname, "public")));
 //----------------------------------------------------------------
 //  route requests to your various apps below
 //----------------------------------------------------------------
-app.use('/api/v1', require('./api/v1'));
+app.use('/api/v1', require('./apps/api/v1'));
 app.use('/', require('./apps/phoneapp'));
 
 // all routes not captured by the router are served a basic 404
