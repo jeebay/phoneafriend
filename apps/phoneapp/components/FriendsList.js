@@ -5,7 +5,10 @@ var _ = require('lodash');
 
 var FriendList = React.createClass({
 	getInitialState: function () {
-		return {friends: []};
+		return {
+			friends: [],
+			editing: null
+		};
 	},
 	componentDidMount: function () {
 		this.getFriendsFromServer({user: this.props.currentUser});
@@ -51,8 +54,21 @@ var FriendList = React.createClass({
 			}.bind(this)
 		});
 	},
-	editFriend: function (_id) {
-		
+	editFriend: function (_id, cb) {
+		this.setState({editing: _id}, cb);
+	},
+	saveFriend: function (_id, friend, cb) {
+		$.ajax({
+			method: "PUT",
+			url: url + "friends/" + _id,
+			data: friend,
+			success: function () {
+				alert("Friend updated!");
+			},
+			error: function (xhr, status, err) {
+				alert("Friend update not successful", err.toString());
+			}
+		})
 	},
 	addFriend: function (e) {
 		e.preventDefault();
@@ -93,7 +109,9 @@ var FriendList = React.createClass({
 				name={friend.friendName}
 				email={friend.friendEmail}
 				phone={friend.friendPhone}
-				uniq={friend._id}
+				key={friend._id}
+				editing={friend._id == this.editing}
+				saveFriend={this.saveFriend}
 				removeFriend={this.removeFriend}
 				editFriend={this.editFriend}
 				bgColor={index % 2}
