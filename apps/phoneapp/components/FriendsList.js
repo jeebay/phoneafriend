@@ -54,17 +54,21 @@ var FriendList = React.createClass({
 			}.bind(this)
 		});
 	},
-	editFriend: function (_id, cb) {
+	editFriend: function (_id, cb) {		
 		this.setState({editing: _id}, cb);
+	},
+	cancelEdit: function () {
+		this.setState({editing: null});
 	},
 	saveFriend: function (_id, friend, cb) {
 		$.ajax({
 			method: "PUT",
-			url: url + "friends/" + _id,
+			url: this.props.url + "friends/" + _id,
 			data: friend,
 			success: function () {
 				alert("Friend updated!");
-			},
+				this.setState({editing: null})
+			}.bind(this),
 			error: function (xhr, status, err) {
 				alert("Friend update not successful", err.toString());
 			}
@@ -106,14 +110,13 @@ var FriendList = React.createClass({
 		var friends = this.state.friends.map(function(friend, index) {
 			return (
 				<Friend 
-				name={friend.friendName}
-				email={friend.friendEmail}
-				phone={friend.friendPhone}
+				friend={friend}
 				key={friend._id}
-				editing={friend._id == this.editing}
+				editing={friend._id === this.state.editing}
 				saveFriend={this.saveFriend}
 				removeFriend={this.removeFriend}
 				editFriend={this.editFriend}
+				onCancel={this.cancelEdit}
 				bgColor={index % 2}
 				/>
 			);

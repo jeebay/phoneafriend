@@ -5,41 +5,25 @@ var Radium = require('radium');
 var Friend = React.createClass({
 	getInitialState: function () {
 		return {
-			name: this.props.name,
-			email: this.props.email,
-			phone: this.props.phone,
+			name: this.props.friend.friendName,
+			email: this.props.friend.friendEmail,
+			phone: this.props.friend.friendPhone,
 			editing: this.props.editing,
 			ENTER: 13,
 			ESC: 27
 		}
 	},
-	render: function () {
-		return (
-			<div style={[styles.liBase, this.props.bgColor && styles.bgColor]}>
-				<span style={this.props.editing ? styles.editing : styles.base}> 
-					<p>{this.state.name} | {this.state.email} | {this.state.phone}</p>
-					<br />
-					<button style={this.props.editing && styles.editing} className="btn btn-danger" onClick={this.removeFriend}>Delete</button>
-					<button style={this.props.editing && styles.editing} className="btn btn-warning" onClick={this.editFriend}>Edit</button>
-				</span>
-				<span style={!this.props.editing ? styles.editing : styles.edit}>
-					<input ref="editName" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.name} />
-					<input ref="editEmail" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.email} />
-					<input ref="editPhone" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.phone} />
-					<button onClick={this.submitChange}>Submit</button>
-				</span>
-			</div>
-		);
-	},
 	removeFriend: function () {
-		var key = this.props.key;
+		var key = this.props.friend._id;
 		this.props.removeFriend(key);
 	},
 	editFriend: function () {
-		var key = this.props.key;
+		var key = this.props.friend._id;
 		this.props.editFriend(key, function() {
-			this.setState({editing: true})
-		}.bind(this));
+			var node = React.findDOMNode(this.refs.editName);
+			node.focus();
+		}.bind(this))
+		this.render()
 	},
 	submitChange: function () {
 		var friend = {
@@ -47,7 +31,7 @@ var Friend = React.createClass({
 			friendEmail: this.state.email.trim(),
 			friendPhone: this.state.phone.trim()
 		};
-		this.props.saveFriend(key, friend);
+		this.props.saveFriend(this.props.friend._id, friend);
 	},
 	handleChange: function () {
 		this.setState({
@@ -62,7 +46,24 @@ var Friend = React.createClass({
 		} else if (event.which == this.state.ESC) {
 			this.props.onCancel();
 		}
-	}	
+	},	
+	render: function () {
+		return (
+			<div style={[styles.liBase, this.props.bgColor && styles.bgColor]}>
+				<span style={this.props.editing ? styles.editing : styles.base}> 
+					<p>{this.state.name} | {this.state.email} | {this.state.phone}</p>
+					<br />
+					<button className="btn btn-danger" onClick={this.removeFriend}>Delete</button>
+					<button className="btn btn-warning" onClick={this.editFriend}>Edit</button>
+				</span>
+				<span style={!this.props.editing ? styles.editing : styles.edit}>
+					<input ref="editName" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.name} />
+					<input ref="editEmail" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.email} />
+					<input ref="editPhone" type="text" onChange={this.handleChange} onKeyDown={this.handleKeyDown} value={this.state.phone} />
+				</span>
+			</div>
+		);
+	}
 });
 
 var styles = {
