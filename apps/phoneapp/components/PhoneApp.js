@@ -10,7 +10,7 @@ var Radium = require('radium');
 var PhoneApp = React.createClass({
     getInitialState: function () {
         return {
-            currentView: "manageFriends",
+            currentView: "login",
             availability: 0,
             timerVisibility: false,
             timerComplete: false

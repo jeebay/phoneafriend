@@ -23,7 +23,6 @@ var Friend = React.createClass({
 			var node = React.findDOMNode(this.refs.editName);
 			node.focus();
 		}.bind(this))
-		this.render()
 	},
 	submitChange: function () {
 		var friend = {

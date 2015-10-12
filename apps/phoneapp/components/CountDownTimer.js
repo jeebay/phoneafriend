@@ -137,7 +137,7 @@ var styles = {
   base: {
     textAlign: "center",
     marginTop: "20px",
-    fontsize: "1.5em"
+    fontSize: "1.5em"
   }
 }
 
